@@ -2,6 +2,7 @@
   (:require [com.biffweb :as biff]
             [com.zolotyh.planace.email :as email]
             [com.zolotyh.planace.app :as app]
+            [com.zolotyh.planace.poker.app :as poker]
             [com.zolotyh.planace.home :as home]
             [com.zolotyh.planace.middleware :as mid]
             [com.zolotyh.planace.ui :as ui]
@@ -17,6 +18,7 @@
 
 (def modules
   [app/module
+   poker/module
    (biff/authentication-module {})
    home/module
    schema/module
