@@ -14,6 +14,12 @@
    (r/match-by-name router ::room-item {:room-id room-id})
    :path))
 
+(defn game-url-fn [{:keys [game-id room-id reitit.core/router]}]
+  (->
+   (r/match-by-name router ::game-item {:room-id room-id
+                                        :game-id game-id})
+   :path))
+
 (defn room-list [ctx]
   (render
    (ui/room-list
@@ -21,11 +27,20 @@
            {:items (range 10)
             :room-url-fn room-url-fn}))))
 
-(defn room-item [ctx]
-  (base ctx [:b "room-item"]))
-
 (defn game-list [ctx]
-  (base ctx [:b "game-list"]))
+  (render
+   (ui/game-list
+    (merge ctx
+           {:items (range 10)
+            :game-url-fn game-url-fn}))))
+
+(defn room-item [ctx]
+  (render
+   (ui/game-list
+    (merge ctx
+           {:items (range 10)
+            :game-url-fn game-url-fn}))))
+  ; (base ctx [:b "rooom-item"]))
 
 (defn game-item [ctx]
   (base ctx [:b "game-item"]))
