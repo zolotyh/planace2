@@ -40,7 +40,6 @@
     (merge ctx
            {:items (range 10)
             :game-url-fn game-url-fn}))))
-  ; (base ctx [:b "rooom-item"]))
 
 (defn game-item [ctx]
   (base ctx [:b "game-item"]))
