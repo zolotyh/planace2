@@ -4,10 +4,10 @@
    [com.biffweb :refer [render]]
    [com.zolotyh.planace.middleware :as mid]
    [com.zolotyh.planace.poker.poker-ui :as ui]
-   [com.zolotyh.planace.poker.ui :refer [base]]))
+   [com.zolotyh.planace.poker.ui :as bui]))
 
-(defn poker [ctx]
-  (base ctx [:div {:hx-boost "true" :hx-get "/poker/room" :hx-trigger "load"} (ui/loading)]))
+(defn poker [{:keys [headers] :as ctx}]
+  (bui/htmx ctx [:div {:hx-boost "true" :hx-get "/poker/room" :hx-trigger "load"} (ui/loading)]))
 
 (defn room-url-fn [{:keys [room-id reitit.core/router]}]
   (->
@@ -21,28 +21,28 @@
    :path))
 
 (defn room-list [ctx]
-  (render
-   (ui/room-list
-    (merge ctx
-           {:items (range 10)
-            :room-url-fn room-url-fn}))))
+  (bui/htmx ctx
+            (ui/room-list
+             (merge ctx
+                    {:items (range 10)
+                     :room-url-fn room-url-fn}))))
 
 (defn game-list [ctx]
-  (render
-   (ui/game-list
-    (merge ctx
-           {:items (range 10)
-            :game-url-fn game-url-fn}))))
+  (bui/htmx ctx
+            (ui/game-list
+             (merge ctx
+                    {:items (range 10)
+                     :game-url-fn game-url-fn}))))
 
 (defn room-item [ctx]
-  (render
-   (ui/game-list
-    (merge ctx
-           {:items (range 10)
-            :game-url-fn game-url-fn}))))
+  (bui/htmx ctx
+            (ui/game-list
+             (merge ctx
+                    {:items (range 10)
+                     :game-url-fn game-url-fn}))))
 
 (defn game-item [ctx]
-  (base ctx [:b "game-item"]))
+  (bui/htmx ctx [:b "game-item"]))
 
 (def module {:routes ["/poker" {:middleware [mid/wrap-signed-in]}
                       ["" {:get poker}]

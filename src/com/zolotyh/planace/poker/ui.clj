@@ -2,6 +2,7 @@
   (:require
    [clojure.java.io :as io]
    [com.biffweb :as biff]
+   [com.zolotyh.planace.poker.request :as request]
    [com.zolotyh.planace.settings :as settings]
    [ring.util.response :as ring-response]))
 
@@ -23,7 +24,7 @@
                      :description (str settings/app-name " Description")
                      :image "https://clojure.org/images/clojure-logo-120b.png"})
        (update :base/head (fn [head]
-                            (concat [[:link {:rel "stylesheet" :href (static "/css/pico.min.css")}]
+                            (concat [[:link {:rel "stylesheet" :href (static "/css/water.css")}]
                                      [:link {:rel "stylesheet" :href (static "/css/main.css")}]
                                      [:script {:src (static "/js/main.js")}]
                                      [:script {:src (static "/js/htmx.min.js")}]
@@ -34,3 +35,15 @@
                                                  :async "async" :defer "defer"}])]
                                     head))))
    body))
+
+(defn with-header [ctx & body]
+  (base ctx
+        [:<>
+         [:h1 "Planace"]
+         [:input {:type "text"}]
+         [:div {:hx-boost "true"}
+          body]]))
+
+(defn htmx [ctx & body]
+  (if (request/htmx? ctx) (biff/render body) (with-header ctx body)))
+
