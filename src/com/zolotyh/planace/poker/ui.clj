@@ -41,9 +41,9 @@
         [:<>
          [:h1 "Planace"]
          [:input {:type "text"}]
-         [:div {:hx-boost "true"}
+         [:div {:hx-boost "true" :id "content" :hx-swap "innerHTML"}
           body]]))
 
 (defn htmx [ctx & body]
-  (if (request/htmx? ctx) (biff/render body) (with-header ctx body)))
+  (if (request/htmx? ctx) (biff/render [:div {:id "content"} body]) (with-header ctx body)))
 

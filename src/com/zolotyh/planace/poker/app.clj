@@ -7,7 +7,7 @@
    [com.zolotyh.planace.poker.ui :as bui]))
 
 (defn poker [{:keys [headers] :as ctx}]
-  (bui/htmx ctx [:div {:hx-boost "true" :hx-get "/poker/room" :hx-trigger "load"} (ui/loading)]))
+  (bui/htmx ctx [:div {:hx-get "/poker/room" :hx-trigger "load"} (ui/loading)]))
 
 (defn room-url-fn [{:keys [room-id reitit.core/router]}]
   (->
