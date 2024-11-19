@@ -25,12 +25,19 @@
             (ui/nav ctx
                     (map (partial reverse-url ctx) (generate-items)))))
 
+(defn game-list [ctx]
+  (bui/htmx ctx
+            [:div
+             [:div "game list"]
+             (ui/nav ctx
+                     (map (partial reverse-url ctx) (generate-items)))]))
+
 (def module {:routes ["/poker" {:middleware [mid/wrap-signed-in]}
                       ["" {:get poker}]
                       ["/room"
                        ["" {:get room-list :name ::room-list}]
                        ["/:id"
-                        ["" {:get room-list :name ::room-item}]
+                        ["" {:get game-list :name ::room-item}]
                         ["/game"
                          ["" {:get dummy :name ::game-list}]
                          ["/:game-id" {:get dummy :name ::game-item}]]]]]})
