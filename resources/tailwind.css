@@ -14,4 +14,9 @@
   }
 }
 
+:root {
+  --bulma-weight-light: 100;
+  --bulma-weight-normal: 300;
+}
+
 .grecaptcha-badge { visibility: hidden; }

@@ -4,7 +4,8 @@
 
 (def styles
   [:<>
-   [:link {:rel "stylesheet", :href (u/static-path "/css/water.css")}]
+   [:link {:rel "stylesheet", :href (u/static-path "/css/inter.css")}]
+   [:link {:rel "stylesheet", :href (u/static-path "/css/bulma.min.css")}]
    [:link {:rel "stylesheet", :href (u/static-path "/css/main.css")}]])
 
 (def scripts

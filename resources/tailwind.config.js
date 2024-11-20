@@ -4,7 +4,11 @@ module.exports = {
     './resources/**/*',
   ],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio: {
+        '63/88': '63 / 88',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

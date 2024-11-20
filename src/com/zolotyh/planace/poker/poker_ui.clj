@@ -18,19 +18,28 @@
    [:a {:href "/"} "Planace"]])
 
 (defn main-template [_]
-  [:main "main"])
+  [:main.grid.is-col-min-4.px-20.is-column-gap-4.flex-grow
+   [:div {:class "box aspect-[63/88] max-w-40"} "test"]
+   [:div {:class "box aspect-[63/88] max-w-40"} "test"]
+   [:div {:class "box aspect-[63/88] max-w-40"} "test"]
+   [:div {:class "box aspect-[63/88] max-w-40"} "test"]])
 
 (defn footer-template [_]
-  [:footer "footer"])
+  [:footer.footer
+   [:div.content.has-text-centered "test"]])
 
 (defn header-template [_]
-  [:header logo])
+  [:header.hero
+   [:div.hero-body
+    [:h1 {:class "title"} "Planace"]
+    [:p {:class "subtitle"} "Collaboratively estimate tasks with your team"]]])
 
 (defn container [& content]
   [:html
    [:head
-    (head/head {:title "title"})]
-   [:body
+    (head/head {:title "hello"})]
+   [:body.flex.flex-col.h-screen.justify-between.min-h-screen
+
     content]])
 
 (defn layout [{:keys [header footer main]}]
