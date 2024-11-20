@@ -8,7 +8,7 @@
   (fn [{:keys [session] :as ctx}]
     (if (some? (:uid session))
       {:status 303
-       :headers {"location" "/app"}}
+       :headers {"location" "/poker"}}
       (handler ctx))))
 
 (defn wrap-signed-in [handler]

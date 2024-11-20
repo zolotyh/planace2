@@ -17,8 +17,8 @@
 (defn dummy [ctx]
   (bui/htmx ctx [:p "game-item"]))
 
-(defn poker [ctx]
-  (bui/htmx ctx [:div {:hx-get "/poker/room" :hx-trigger "load"} (ui/loading)]))
+; (defn poker [ctx]
+;   (bui/htmx ctx [:div {:hx-get "/poker/room" :hx-trigger "load"} (ui/loading)]))
 
 (defn room-list [ctx]
   (bui/htmx ctx
@@ -31,6 +31,9 @@
              [:div "game list"]
              (ui/nav ctx
                      (map (partial reverse-url ctx) (generate-items)))]))
+
+(defn poker [_]
+  (ui/layout {:header "header" :footer "footer" :main "main"}))
 
 (def module {:routes ["/poker" {:middleware [mid/wrap-signed-in]}
                       ["" {:get poker}]
