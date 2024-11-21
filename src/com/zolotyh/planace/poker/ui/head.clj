@@ -6,7 +6,8 @@
   [:<>
    [:link {:rel "stylesheet", :href (u/static-path "/css/inter.css")}]
    [:link {:rel "stylesheet", :href (u/static-path "/css/bulma.min.css")}]
-   [:link {:rel "stylesheet", :href (u/static-path "/css/main.css")}]])
+   [:link {:rel "stylesheet", :href (u/static-path "/css/main.css")}]
+   [:link {:rel "stylesheet", :href "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"}]])
 
 (def scripts
   [:<>
