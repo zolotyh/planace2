@@ -1,4 +1,6 @@
-(ns com.zolotyh.planace.poker.ui.votes)
+(ns com.zolotyh.planace.poker.ui.votes
+  (:require
+   [com.zolotyh.planace.poker.ui.task-list :as tl]))
 
 (defn vote-results []
   (->> (range 10)
@@ -36,13 +38,7 @@
       Ошибки должны отображаться как можно ближе к коду, который их вызвал
 "]
    [:br]
-   [:div.panel.text-xs
-    [:a.panel-block {:href "test"}
-     [:span.tag.is-primary.mr-2 "WTE-12345"] "Test"]
-    [:a.panel-block.has-background-link {:href "test"}
-     [:span.tag.is-primary.mr-2 "WTE-12345"] "Test"]
-    [:a.panel-block {:href "test"}
-     [:span.tag.is-primary.mr-2 "WTE-12345"] "Test"]]])
+   (tl/task-list)])
 
 (defn results []
   [:div.grid.grid-cols-12.gap-8
