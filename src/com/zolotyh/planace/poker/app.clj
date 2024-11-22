@@ -2,8 +2,7 @@
   (:require
    [reitit.core :as r]
    [com.zolotyh.planace.middleware :as mid]
-   [com.zolotyh.planace.poker.poker-ui :as ui]
-   [com.zolotyh.planace.poker.ui :as bui]))
+   [com.zolotyh.planace.poker.ui :as ui]))
 
 (defn generate-items []
   (->> (range 10)
@@ -15,22 +14,19 @@
   (merge {:url (r/match-by-name router ::room-item (merge path-params item))} item))
 
 (defn dummy [ctx]
-  (bui/htmx ctx [:p "game-item"]))
-
-; (defn poker [ctx]
-;   (bui/htmx ctx [:div {:hx-get "/poker/room" :hx-trigger "load"} (ui/loading)]))
+  (ui/htmx ctx [:p "game-item"]))
 
 (defn room-list [ctx]
-  (bui/htmx ctx
-            (ui/nav ctx
-                    (map (partial reverse-url ctx) (generate-items)))))
+  (ui/htmx ctx
+           (ui/nav ctx
+                   (map (partial reverse-url ctx) (generate-items)))))
 
 (defn game-list [ctx]
-  (bui/htmx ctx
-            [:div
-             [:div "game list"]
-             (ui/nav ctx
-                     (map (partial reverse-url ctx) (generate-items)))]))
+  (ui/htmx ctx
+           [:div
+            [:div "game list"]
+            (ui/nav ctx
+                    (map (partial reverse-url ctx) (generate-items)))]))
 
 (defn poker [_]
   (ui/layout {:header "header" :footer "footer" :main "main"}))

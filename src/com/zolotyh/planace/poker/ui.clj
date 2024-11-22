@@ -4,7 +4,11 @@
    [com.biffweb :as biff]
    [com.zolotyh.planace.poker.request :as request]
    [com.zolotyh.planace.settings :as settings]
-   [ring.util.response :as ring-response]))
+   [ring.util.response :as ring-response]
+   [com.zolotyh.planace.poker.ui.footer :refer [footer-template]]
+   [com.zolotyh.planace.poker.ui.head :as head]
+   [com.zolotyh.planace.poker.ui.header :refer [header-template]]
+   [com.zolotyh.planace.poker.ui.votes :as v]))
 
 (defn static [path]
   (if-some [last-modified (some-> (io/resource (str "public" path))
@@ -47,3 +51,19 @@
 (defn htmx [ctx & body]
   (if (request/htmx? ctx) (biff/render [:div {:id "content"} body]) (with-header ctx body)))
 
+(defn main-template [_]
+  [:main.flex-grow.px-12.pb-40
+   (v/results)])
+
+(defn container [& content]
+  [:html
+   [:head
+    (head/head {:title "hello"})]
+   [:body.flex.flex-col.h-screen.justify-between.min-h-screen
+    content]])
+
+(defn layout [{:keys [header main]}]
+  (container
+   (header-template header)
+   (main-template main)
+   (footer-template)))
