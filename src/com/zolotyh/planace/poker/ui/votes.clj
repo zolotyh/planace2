@@ -7,20 +7,24 @@
        (map #(hash-map :id %1 :name (str (random-uuid)) :isActive (< (rand) 0.5)))))
 
 (defn vote [{:keys [name isActive]}]
-  [:span.panel-block.opacity-50
+  [:span {:class (str "panel-block " (when (not isActive) "opacity-50"))}
    [:span.panel-icon
-    [:i {:class (str  "fas fa-user fa-solid" (if isActive " has-text-success" " test2"))}]]
+    [:i {:class (str  "fas fa-user fa-solid" (if isActive " has-text-primary" " test2"))}]]
    name])
+
+(defn vote-result []
+  [:<>
+   [:h4.mb-0.text-xl.pb-0.leading-4.font-normal "Result"]
+   [:p.leading-1
+    (str "current result is: ")
+    [:span.text-xl.has-text-warning 5]]])
 
 (defn votes-widget []
   [:div.col-start-0.col-span-5
-   [:h4.mb-0.text-2xl "Result"]
-   [:p
-    (str "current result is: ")
-    [:span.text-xl.has-text-warning 5]]
-   [:br]
    [:div {:class "panel text-xs"}
-    (map vote (vote-results))]])
+    (map vote (vote-results))]
+   [:br]
+   (vote-result)])
 
 (defn task-widget []
   [:div.col-start-6.col-span-6
