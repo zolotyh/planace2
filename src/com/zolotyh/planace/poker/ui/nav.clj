@@ -6,6 +6,6 @@
             :hx-replace-url (:path url)
             :href (:path url)} name]])
 
-(defn nav [ctx items]
+(defn nav [_ items]
   [:ul (map nav-item items)])
 

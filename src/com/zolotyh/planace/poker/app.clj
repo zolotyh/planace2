@@ -2,6 +2,7 @@
   (:require
    [reitit.core :as r]
    [com.zolotyh.planace.middleware :as mid]
+   [com.zolotyh.planace.poker.ui.nav :as nav]
    [com.zolotyh.planace.poker.ui :as ui]))
 
 (defn generate-items []
@@ -18,15 +19,15 @@
 
 (defn room-list [ctx]
   (ui/htmx ctx
-           (ui/nav ctx
-                   (map (partial reverse-url ctx) (generate-items)))))
+           (nav/nav ctx
+                    (map (partial reverse-url ctx) (generate-items)))))
 
 (defn game-list [ctx]
   (ui/htmx ctx
            [:div
             [:div "game list"]
-            (ui/nav ctx
-                    (map (partial reverse-url ctx) (generate-items)))]))
+            (nav/nav ctx
+                     (map (partial reverse-url ctx) (generate-items)))]))
 
 (defn poker [_]
   (ui/layout {:header "header" :footer "footer" :main "main"}))
