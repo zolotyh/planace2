@@ -1,9 +1,10 @@
 (ns com.zolotyh.planace.poker.app
   (:require
-   [reitit.core :as r]
    [com.zolotyh.planace.middleware :as mid]
+   [com.zolotyh.planace.poker.hx-api :as hx]
+   [com.zolotyh.planace.poker.ui :as ui]
    [com.zolotyh.planace.poker.ui.nav :as nav]
-   [com.zolotyh.planace.poker.ui :as ui]))
+   [reitit.core :as r]))
 
 (defn generate-items []
   (->> (range 10)
@@ -38,6 +39,7 @@
                        ["" {:get room-list :name ::room-list}]
                        ["/:id"
                         ["" {:get game-list :name ::room-item}]
+                        ["/voters" {:get hx/voters}]
                         ["/game"
                          ["" {:get dummy :name ::game-list}]
                          ["/:game-id" {:get dummy :name ::game-item}]]]]]})
