@@ -3,8 +3,10 @@
    [com.zolotyh.planace.middleware :as mid]
    [com.zolotyh.planace.poker.hx-api :as hx]
    [com.zolotyh.planace.poker.ui :as ui]
+   [com.zolotyh.planace.poker.ui.cards :as c]
    [com.zolotyh.planace.poker.ui.nav :as nav]
-   [reitit.core :as r]))
+   [com.zolotyh.planace.poker.ui.votes :as v]
+   [com.zolotyh.planace.poker.url-utils :as url]))
 
 (defn generate-items []
   (->> (range 10)
@@ -12,23 +14,22 @@
                       :name (str
                              (random-uuid))}))))
 
-(defn reverse-url [{:keys [reitit.core/router path-params]} item]
-  (merge {:url (r/match-by-name router ::room-item (merge path-params item))} item))
+(defn room-list [_]
+  (ui/layout {:header "header"
+              :footer (c/cards)
+              :main (v/results)}))
 
-(defn dummy [ctx]
-  (ui/htmx ctx [:p "game-item"]))
-
-(defn room-list [ctx]
-  (ui/htmx ctx
-           (nav/nav ctx
-                    (map (partial reverse-url ctx) (generate-items)))))
+(defn game-item [_]
+  (ui/layout {:header "header"
+              :footer (c/cards)
+              :main (v/results)}))
 
 (defn game-list [ctx]
   (ui/htmx ctx
            [:div
             [:div "game list"]
             (nav/nav ctx
-                     (map (partial reverse-url ctx) (generate-items)))]))
+                     (map (partial url/reverse-url ctx) (generate-items)))]))
 
 (defn poker [_]
   (ui/layout {:header "header" :footer "footer" :main "main"}))
@@ -39,10 +40,10 @@
                        ["" {:get room-list :name ::room-list}]
                        ["/:id"
                         ["" {:get game-list :name ::room-item}]
-                        ["/votes" {:get hx/votes}]
-                        ["/cards" {:get hx/cards}]
-                        ["/tasks" {:get hx/tasks}]
+                        ["/votes" {:get hx/vote-list}]
+                        ["/cards" {:get hx/card-list}]
+                        ["/tasks" {:get hx/task-list}]
                         ["/game"
-                         ["" {:get dummy :name ::game-list}]
-                         ["/:game-id" {:get dummy :name ::game-item}]]]]]})
+                         ["" {:get game-list :name ::game-list}]
+                         ["/:game-id" {:get game-item :name ::game-item}]]]]]})
 

@@ -51,9 +51,9 @@
 (defn htmx [ctx & body]
   (if (request/htmx? ctx) (biff/render [:div {:id "content"} body]) (with-header ctx body)))
 
-(defn main-template [_]
+(defn main-template [main]
   [:main.flex-grow.px-12.pb-40
-   (v/results)])
+   main])
 
 (defn container [& content]
   [:html
@@ -62,8 +62,8 @@
    [:body.flex.flex-col.h-screen.justify-between.min-h-screen
     content]])
 
-(defn layout [{:keys [header main]}]
+(defn layout [{:keys [header main footer]}]
   (container
    (header-template header)
    (main-template main)
-   (footer-template)))
+   (footer-template footer)))
