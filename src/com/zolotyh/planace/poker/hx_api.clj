@@ -5,5 +5,11 @@
        (map #(hash-map :id %1))
        (map #(merge % {:name (str (random-uuid))}))))
 
-(defn voters [ctx]
-  [:div "Test"])
+(defn votes [_]
+  [:div "Votes"])
+
+(defn tasks [_]
+  [:div "Tasks"])
+
+(defn cards [_]
+  [:div "Cards"])

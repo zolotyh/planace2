@@ -39,7 +39,9 @@
                        ["" {:get room-list :name ::room-list}]
                        ["/:id"
                         ["" {:get game-list :name ::room-item}]
-                        ["/voters" {:get hx/voters}]
+                        ["/votes" {:get hx/votes}]
+                        ["/cards" {:get hx/cards}]
+                        ["/tasks" {:get hx/tasks}]
                         ["/game"
                          ["" {:get dummy :name ::game-list}]
                          ["/:game-id" {:get dummy :name ::game-item}]]]]]})
