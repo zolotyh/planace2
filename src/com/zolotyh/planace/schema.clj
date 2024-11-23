@@ -3,18 +3,12 @@
 (def schema
   {:user/id :uuid
    :user [:map {:closed true}
-          [:xt/id                     :user/id]
-          [:user/email                :string]
-          [:user/joined-at            inst?]
-          [:user/foo {:optional true} :string]
-          [:user/bar {:optional true} :string]]
-
-   :msg/id :uuid
-   :msg [:map {:closed true}
-         [:xt/id       :msg/id]
-         [:msg/user    :user/id]
-         [:msg/text    :string]
-         [:msg/sent-at inst?]]
+          [:xt/id                                     :user/id]
+          [:user/email                                :string]
+          [:user/last-nane  {:optional true}          string?]
+          [:user/first-name {:optional true}          string?]
+          [:user/rooms      {:optional true}         [:vector :room/id]]
+          [:user/joined-at  inst?]]
 
    :room/id :uuid
    :room [:map {:closed true}
@@ -37,6 +31,5 @@
                          [:map {:closed true}
                           [:vote {:optional true} int?]
                           [:user :user/id]]]]]})
-
 (def module
   {:schema schema})
