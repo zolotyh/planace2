@@ -36,11 +36,15 @@
             (nav/nav ctx
                      (map (partial url/reverse-url ctx) (generate-items)))]))
 
+(defn create-room [_]
+  [:div "Test"])
+
 (defn poker [_]
   (ui/layout {:header "header" :footer "footer" :main "main"}))
 
 (def module {:routes ["/poker" {:middleware [mid/wrap-signed-in]}
                       ["" {:get poker}]
+                      ["/create" {:get create-room}]
                       ["/room"
                        ["" {:get room-list :name ::room-list}]
                        ["/:id"
