@@ -8,6 +8,11 @@
    [com.zolotyh.planace.poker.ui.votes :as v]
    [com.zolotyh.planace.poker.url-utils :as url]))
 
+;TODO: room creation form
+;TODO: generate-random-numbers for public id for room / check if those number are not equal to previous 
+;TODO: vote process
+;TODO: update votes by ws
+
 (defn generate-items []
   (->> (range 10)
        (map (fn [id] {:id id
