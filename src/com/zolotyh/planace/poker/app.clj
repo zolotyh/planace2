@@ -6,6 +6,7 @@
    [com.zolotyh.planace.poker.ui.cards :as c]
    [com.zolotyh.planace.poker.ui.nav :as nav]
    [com.zolotyh.planace.poker.ui.votes :as v]
+   [com.zolotyh.planace.poker.pages.main :as main]
    [com.zolotyh.planace.poker.url-utils :as url]))
 
 ;TODO: room creation form
@@ -39,11 +40,8 @@
 (defn create-room [_]
   [:div "Test"])
 
-(defn poker [_]
-  (ui/layout {:header "header" :footer "footer" :main "main"}))
-
 (def module {:routes ["/poker" {:middleware [mid/wrap-signed-in]}
-                      ["" {:get poker}]
+                      ["" {:get main/content}]
                       ["/create" {:get create-room}]
                       ["/room"
                        ["" {:get room-list :name ::room-list}]
